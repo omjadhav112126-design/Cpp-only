@@ -1,0 +1,119 @@
+#include <iostream>
+using namespace std;
+
+int a[5][5];
+bool visited[5][5];
+
+void dfs(int i, int j)
+{
+    // Check boundary
+    if (i < 0 || i >= 5 || j < 0 || j >= 5)
+        return;
+
+    // Check if blocked or already visited
+    if (a[i][j] == 0 || visited[i][j])
+        return;
+
+    // Mark as visited
+    visited[i][j] = true;
+
+    cout << "[" << i << "][" << j << "] ";
+
+    // Up
+    dfs(i - 1, j);
+
+    // Down
+    dfs(i + 1, j);
+
+    // Left
+    dfs(i, j - 1);
+
+    // Right
+    dfs(i, j + 1);
+}
+
+void enterMatrix()
+{
+    cout << "\nEnter values for 5x5 Matrix:\n";
+
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            cin >> a[i][j];
+        }
+    }
+}
+
+void displayMatrix()
+{
+    cout << "\nYour Matrix is:\n";
+
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            cout << a[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+void resetVisited()
+{
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+        {
+            visited[i][j] = false;
+        }
+    }
+}
+
+int main()
+{
+    int choice;
+
+    do
+    {
+        cout << "\n========== MENU ==========\n";
+        cout << "1. Enter Matrix\n";
+        cout << "2. Display Matrix\n";
+        cout << "3. DFS Traversal\n";
+        cout << "4. Exit\n";
+        cout << "==========================\n";
+
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice)
+        {
+            case 1:
+                enterMatrix();
+                break;
+
+            case 2:
+                displayMatrix();
+                break;
+
+            case 3:
+                resetVisited();
+
+                cout << "\nDFS Traversal:\n";
+                dfs(0, 0);
+                cout << endl;
+
+                break;
+
+            case 4:
+                cout << "\nProgram exited.\n";
+                break;
+
+            default:
+                cout << "\nInvalid choice! Please try again.\n";
+        }
+
+    } while (choice != 4);
+
+    return 0;
+}
