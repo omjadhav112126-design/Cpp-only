@@ -1,0 +1,15 @@
+
+import hashlib
+
+# Input message
+message = input("Enter a message: ")
+
+# Convert message into bytes
+data = message.encode()
+
+# Generate SHA-256 hash
+hash_value = hashlib.sha256(data).hexdigest()
+
+# Display hash
+print("Original Message:", message)
+print("SHA-256 Hash:", hash_value)
